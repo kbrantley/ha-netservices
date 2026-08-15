@@ -9,6 +9,28 @@
 5. A Supervisor config is generated from service metadata.
 6. Supervisor starts and keeps enabled services running.
 
+## Management API
+
+The add-on includes a small Go management service built during Docker image build.
+It is routed through HAProxy at:
+
+- `/mgmt/{service}/{check,reload,status}`
+
+Current services:
+- `haproxy`
+- `bind`
+- `radiusd`
+
+Current action semantics:
+- `check`: runs the service syntax/validation command.
+- `status`: returns a process identifier when running.
+- `reload`:
+	- HAProxy: validates config, then sends `SIGUSR2` to the HAProxy master process.
+	- BIND: sends `SIGHUP` to `named`.
+	- FreeRADIUS: sends `SIGTERM` and waits for supervisor to restart `radiusd`.
+
+The API returns JSON including success/failure, exit code, stdout/stderr, and duration.
+
 ## Default Files
 
 - HAProxy defaults: `rootfs/etc/defaults/haproxy/haproxy.cfg`

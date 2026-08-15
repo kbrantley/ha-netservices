@@ -35,11 +35,13 @@ options:
   enable_haproxy: true
   enable_bind: true
   enable_radiusd: true
+  enable_mgmt: true
 
 schema:
   enable_haproxy: bool
   enable_bind: bool
   enable_radiusd: bool
+  enable_mgmt: bool
 
 host_network: false
 privileged: []

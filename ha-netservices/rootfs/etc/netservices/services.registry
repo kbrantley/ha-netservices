@@ -2,3 +2,4 @@
 /etc/netservices/services/haproxy.module
 /etc/netservices/services/bind.module
 /etc/netservices/services/radiusd.module
+/etc/netservices/services/mgmt.module

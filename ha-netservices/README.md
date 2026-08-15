@@ -4,6 +4,7 @@ NetServices is a modular multi-service add-on that runs:
 - HAProxy
 - BIND (named)
 - FreeRADIUS (radiusd)
+- Management API (mgmt)
 
 The runtime is built so service lifecycle logic is shared. Each service is defined as a small module file, making it straightforward to add additional services without duplicating startup or validation code.
 
@@ -24,6 +25,7 @@ Add-on options expose booleans:
 - `enable_haproxy`
 - `enable_bind`
 - `enable_radiusd`
+- `enable_mgmt`
 
 At least one service must be enabled.
 
@@ -33,6 +35,11 @@ At least one service must be enabled.
 - 443/tcp (HAProxy)
 - 53/tcp and 53/udp (BIND)
 - 1812/udp and 1813/udp (RADIUS)
+
+The Management API is intentionally not exposed as a direct published add-on port.
+It is reachable through HAProxy on:
+
+- `/mgmt/{service}/{check,reload,status}`
 
 ## Modularity Model
 

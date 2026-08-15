@@ -1,4 +1,12 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:3.22
+
+FROM golang:1.23-alpine AS go-builder
+
+WORKDIR /src
+COPY go.mod ./
+COPY cmd ./cmd
+RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/mgmt ./cmd/mgmt
+
 FROM ${BUILD_FROM}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -14,6 +22,7 @@ RUN apk add --no-cache \
 	netcat-openbsd \
 	supervisor
 
+COPY --from=go-builder /out/mgmt /usr/local/bin/mgmt
 COPY rootfs /
 COPY run.sh /run.sh
 
