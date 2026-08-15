@@ -33,5 +33,5 @@ require_service_fields() {
 
 sanitize_id() {
   local value="$1"
-  echo "$value" | tr -c 'a-zA-Z0-9_-' '_'
+  echo "$value" | tr -cs 'a-zA-Z0-9_-' '_' | sed 's/_$//'
 }
