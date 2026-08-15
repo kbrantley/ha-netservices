@@ -1,0 +1,45 @@
+name: "NetServices"
+slug: "ha_netservices"
+version: "0.1.0"
+description: "Modular HAProxy + BIND + FreeRADIUS add-on"
+url: "https://github.com/kbrantley/ha-netservices"
+init: false
+startup: services
+boot: auto
+
+arch:
+  - aarch64
+  - amd64
+  - armv7
+
+map:
+  - config:rw
+
+ports:
+  80/tcp: 80
+  443/tcp: 443
+  53/tcp: 53
+  53/udp: 53
+  1812/udp: 1812
+  1813/udp: 1813
+
+ports_description:
+  80/tcp: "HAProxy HTTP"
+  443/tcp: "HAProxy HTTPS"
+  53/tcp: "BIND DNS TCP"
+  53/udp: "BIND DNS UDP"
+  1812/udp: "RADIUS authentication"
+  1813/udp: "RADIUS accounting"
+
+options:
+  enable_haproxy: true
+  enable_bind: true
+  enable_radiusd: true
+
+schema:
+  enable_haproxy: bool
+  enable_bind: bool
+  enable_radiusd: bool
+
+host_network: false
+privileged: []
