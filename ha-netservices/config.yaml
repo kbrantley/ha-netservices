@@ -1,6 +1,6 @@
 name: "NetServices"
 slug: "ha_netservices"
-version: "0.1.0"
+version: "0.1.1"
 description: "Modular HAProxy + BIND + FreeRADIUS add-on"
 url: "https://github.com/kbrantley/ha-netservices"
 init: false
